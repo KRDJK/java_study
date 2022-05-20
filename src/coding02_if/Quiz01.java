@@ -1,4 +1,4 @@
-package coding02;
+package coding02_if;
 
 import java.util.Scanner;
 
