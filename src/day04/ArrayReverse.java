@@ -6,6 +6,7 @@ public class ArrayReverse {
     public static void main(String[] args) {
 
         int[] arr = {1, 3, 5, 7, 9, 11, 13};
+        // 1과 13을 바꾸고, 3과 11을 바꾸고, 5와 9를 바꾸면 됨.
         System.out.println("reverse전: " + Arrays.toString(arr));
 
         /*
