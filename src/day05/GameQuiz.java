@@ -10,6 +10,7 @@ public class GameQuiz {
         // 인원 수 입력 받기.
         System.out.print("게임 인원 (2 ~ 4명) ==> ");
         int player = sc.nextInt();
+        sc.nextLine();
 
 
         // 인원 수 만큼 플레이어 이름도 받아야 함.
@@ -45,17 +46,18 @@ public class GameQuiz {
 
         // 총알이 모두 소진되거나, player가 한명만 남을 때까지 무한 반복
         while (true) {
+            // 플레이어가 한명만 남은 경우 종료.
+            if (playerList.length <= 1) {
+                System.out.println("# 단 한명만 살아남았습니다. 게임을 종료합니다.");
+                break;
+            }
+
             // 총알 다 떨어진 경우 종료.
             if (bullet <= 0) {
                 System.out.println("# 총알이 모두 소진되었습니다. 게임을 종료합니다.");
                 break;
             }
 
-            // 플레이어가 한명만 남은 경우 종료.
-            if (playerList.length <= 1) {
-                System.out.println("# 단 한명만 살아남았습니다. 게임을 종료합니다.");
-                break;
-            }
 
             // 마지막 순서가 지나면 다시 0번 인덱스의 플레이어부터 시작.
             if(startPlayer > playerList.length-1) {
@@ -71,13 +73,12 @@ public class GameQuiz {
             int rnBullet = (int) (Math.random() * 5-1)+1;
 
             System.out.println("# 엔터를 누르면 격발합니다.");
-            sc.next();
+            sc.nextLine();
 
             if (rnBullet > bullet) {
                 System.out.println("휴.. 살았습니다.");
                 System.out.println();
                 startPlayer++;
-                bullet--;
 //                continue;
             } else { // 죽는 경우
                 bullet--;
@@ -85,7 +86,7 @@ public class GameQuiz {
                 // 죽은 플레이어, 플레이어 목록에서 제거.
                 String[] temp = new String[playerList.length-1];
                     // 일단 원본에서 지울 놈 기준으로 뒷번호를 앞으로 땡기기
-                for (int i = startPlayer; i < playerList.length; i++) {
+                for (int i = startPlayer; i < playerList.length-1; i++) {
                     playerList[i] = playerList[i+1];
                 }
 
@@ -99,6 +100,7 @@ public class GameQuiz {
 
         } // end while
 
+        sc.close();
         System.out.println("# 최후 생존자: " + Arrays.toString(playerList));
         System.out.println("# 게임을 종료합니다.");
 
