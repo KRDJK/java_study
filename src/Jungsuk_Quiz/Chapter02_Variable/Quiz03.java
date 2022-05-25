@@ -14,6 +14,11 @@ public class Quiz03 {
             - 키워드 : final인듯..??
             - 상수 : float PI
 
+            정답 :
+            - 리터럴 : 100, 100L, 3.14f
+            - 변수, i, l
+            - 키워드 : int, long, final, float
+            - 상수 : PI
          */
     }
 }

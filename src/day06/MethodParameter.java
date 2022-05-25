@@ -33,7 +33,7 @@ public class MethodParameter {
         System.out.println("안녕하십니까~?");
     }
 
-
+    // start main
     public static void main(String[] args) {
         System.out.println("함수 호출 전!");
         add(10, 20); // main의 제어권이 잠시 add 함수 부분으로 넘어감.
