@@ -8,19 +8,29 @@ public class 이상한문자만들기 {
 
         int idx = 0;
         for (int i = 0; i < s.length(); i++) {
-            if(' '== s.charAt(i)) {
+            if (' ' == s.charAt(i)) {
                 String a = s.substring(idx, i);
 
 
 //                String b = "";
                 for (int j = 0; j < a.length(); j++) {
                     if (j % 2 == 0) {
-                        answer += a.charAt(j-32);
+                        if ((a.charAt(j) >= 'a' && a.charAt(j) <= 'z')) {
+                            answer += (char) (a.charAt(j) - 32);
+                        } else {
+                            answer += a.charAt(j);
+                        }
+                    } else if (j % 2 == 1) {
+                        if ((a.charAt(j) >= 'A' && a.charAt(j) <= 'Z')) {
+                            answer += (char) (a.charAt(j) + 32);
+                        } else {
+                            answer += a.charAt(j);
+                        }
                     }
                 }
 
-
-                idx = i;
+                idx = i + 1;
+                answer += " ";
             }
         }
 
@@ -28,7 +38,19 @@ public class 이상한문자만들기 {
         String a = s.substring(idx);
 
         for (int i = 0; i < a.length(); i++) {
-
+            if (i % 2 == 0) {
+                if ((a.charAt(i) >= 'a' && a.charAt(i) <= 'z')) {
+                    answer += (char) (a.charAt(i) - 32);
+                } else {
+                    answer += a.charAt(i);
+                }
+            } else if (i % 2 == 1) {
+                if ((a.charAt(i) >= 'A' && a.charAt(i) <= 'Z')) {
+                    answer += (char) (a.charAt(i) + 32);
+                } else {
+                    answer += a.charAt(i);
+                }
+            }
         }
 
         return answer;
@@ -37,5 +59,6 @@ public class 이상한문자만들기 {
 
     public static void main(String[] args) {
         System.out.println(solution("try hello world"));
-    }
-}
+    } // end main
+} // end calss
+
