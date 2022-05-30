@@ -15,7 +15,10 @@ public class 제일작은수제거하기 {
                     min = num;
                 }
             }
+
+
         }
+
 
         // 흠..
 

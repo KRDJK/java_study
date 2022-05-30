@@ -20,7 +20,7 @@ public class SimpleLinkedList {
 
         System.out.printf("\n신규 데이터 %d 맨 앞에 추가!\n", data);
 
-        // 새롭게 추가할 정수 데이터를 신규 노드에 저장.
+        // 새롭게 추가할 정수 데이터가 있으면 신규 노드 생성 및 데이터에 저장.
         Node newNode = new Node(data); // 객체가 생성되면 객체 자체가 들어가는게 아니라 주소가 들어감.
 //        System.out.printf("새로운 노드의 주소: %s\n", newNode);
 
