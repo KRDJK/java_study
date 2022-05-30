@@ -7,12 +7,13 @@ public class 이상한문자만들기 {
 
 
         int idx = 0;
+
+
         for (int i = 0; i < s.length(); i++) {
             if (' ' == s.charAt(i)) {
                 String a = s.substring(idx, i);
 
 
-//                String b = "";
                 for (int j = 0; j < a.length(); j++) {
                     if (j % 2 == 0) {
                         if ((a.charAt(j) >= 'a' && a.charAt(j) <= 'z')) {
@@ -59,6 +60,7 @@ public class 이상한문자만들기 {
 
     public static void main(String[] args) {
         System.out.println(solution("try hello world"));
+
     } // end main
 } // end calss
 

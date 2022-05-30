@@ -2,21 +2,17 @@ package programmers;
 
 public class 음양더하기 {
     static public int solution(int[] absolutes, boolean[] signs) {
-        int answer = 0;
+        long answer = 0;
 
         for (int i = 0; i < signs.length; i++) {
             if (signs[i]) {
-                absolutes[i] *= 1;
+                answer += absolutes[i];
             } else {
-                absolutes[i] *= -1;
+                answer += -absolutes[i];
             }
         }
 
-        for (int i = 0; i < absolutes.length; i++) {
-            answer += absolutes[i];
-        }
-
-        return answer;
+        return (int) answer;
     }
 
 
