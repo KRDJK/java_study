@@ -40,7 +40,7 @@ public class Main {
         linkedList.add(21);
 
         // 데이터 삭제
-        linkedList.remove(3);
+        linkedList.remove(3); // 배열처럼 쓰네
 
         System.out.println(linkedList);
 
