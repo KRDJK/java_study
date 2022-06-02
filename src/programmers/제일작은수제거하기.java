@@ -1,5 +1,7 @@
 package programmers;
 
+import java.util.Arrays;
+
 public class 제일작은수제거하기 {
     public static int[] solution(int[] arr) {
         int[] answer = new int[arr.length-1];
@@ -27,6 +29,6 @@ public class 제일작은수제거하기 {
 
     public static void main(String[] args) {
         int[] arr = {4,3,2,1};
-        System.out.println(solution(arr));
+        System.out.println(Arrays.toString(solution(arr)));
     }
 }
