@@ -6,7 +6,7 @@ public class Test {
     public static void main(String[] args) {
 
         MemberMenu mm = new MemberMenu();
-//        mm.mainMenu();
+        mm.mainMenu();
 
         System.out.println("======================== 직원 월급 관리 프로그램 ========================");
         System.out.println("# 1. 직원 등록");
