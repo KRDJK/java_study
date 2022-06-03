@@ -1,30 +1,25 @@
 package miniproject.com.kh.hw.member.model.vo;
 
-import java.util.Arrays;
-
 public class Member {
 
-    private String id; // 사원 id
+    private String id; // 사원아이디
     private String name; // 이름
     private String rank; // 직급
     private String email; // 이메일
     private String phone; // 전화번호
-    private int basePay; // 기본급
+    private int basePay; // 기본 급여
     private int family; // 가족 수
 //        private Bonus[] bonus;
 
-    private int familyBonus; // 가족 수당
+    private int familyBonus; // 가족 수당 인당 10만원
+    private int familyBonusRate = 100000;
 
     private double taxRate; // 세율
 
-    private int monthSalary; // 한 달 세후 월급
+    private int monthSalary; // 세후 월급
 
 
     //생성자
-    public Member() {
-
-    }
-
     public Member(String id, String name, String rank, String email, String phone, int family) {
         this.id = id;
         this.name = name;
@@ -32,7 +27,10 @@ public class Member {
         this.email = email;
         this.phone = phone;
         this.family = family;
+
+        initTotalAll();
     }
+
 
     public String getId() {
         return id;
@@ -56,6 +54,7 @@ public class Member {
 
     public void setRank(String rank) {
         this.rank = rank;
+        initTotalAll();
     }
 
     public String getEmail() {
@@ -75,17 +74,12 @@ public class Member {
     }
 
     public int getBasePay() {
-        switch (rank) {
-            case "사원" :
-                basePay = 2000000;
-            case "대리" :
-                basePay = 2500000;
-            case "과장" :
-                basePay = 3000000;
-            case "부장" :
-                basePay = 3500000;
-        }
         return basePay;
+    }
+
+    public void setBasePay(int basePay) {
+        this.basePay = basePay;
+        initTotalFamilyBonus();
     }
 
     public int getFamily() {
@@ -94,50 +88,120 @@ public class Member {
 
     public void setFamily(int family) {
         this.family = family;
+        initFamilyBonus(this.family);
     }
 
     public int getFamilyBonus() {
-        familyBonus = family * 100000;
         return familyBonus;
     }
 
+    public void setFamilyBonus(int familyBonus) {
+        this.familyBonus = familyBonus;
+
+        initTotalTaxRate();
+    }
 
     public double getTaxRate() {
-        int sum = basePay + familyBonus;
-        if (sum >= 2000000 && sum < 2500000) {
-            taxRate = 0.05;
-        } else if (sum >= 2500000 && sum < 3000000) {
-            taxRate = 0.1;
-        } else if (sum >= 3000000 && sum < 3500000) {
-            taxRate = 0.15;
-        } else if (sum >= 3500000) {
-            taxRate = 0.2;
-        }
         return taxRate;
     }
 
+    public void setTaxRate(double taxRate) {
+        this.taxRate = taxRate;
+
+        initMonthSalary();
+    }
+
     public int getMonthSalary() {
-        monthSalary = (int) (basePay + familyBonus - ((basePay + familyBonus) * taxRate));
         return monthSalary;
+    }
+
+    public void setMonthSalary(int monthSalary) {
+        this.monthSalary = monthSalary;
     }
 
 
     // 메서드
     public String informBasic() {
-        return String.format("[이름 : %s || 직급 : %s || 이메일 : %s || 전화번호 : %s || 가족 수 : %d ]",
-                name, rank, email, phone, family);
+        return String.format("[사원 아이디: %s || 이름 : %s || 직급 : %s || 이메일 : %s || 전화번호 : %s || 가족 수 : %d ]",
+                id, name, rank, email, phone, family);
     }
 
     public String informSalary() {
-        return String.format("[이름 : %s || 직급 : %s || 기본급 : %d || 가족수당 : %d || 세율 : %.2f || 세후 급여 : %d ]",
-                name, rank, basePay, familyBonus, taxRate, monthSalary);
+        return String.format("[사원 아이디: %s || 이름 : %s || 직급 : %s || 기본급 : %d || 가족수당 : %d || 세율 : %.2f || 세후 급여 : %d ]",
+                id, name, rank, basePay, familyBonus, taxRate, monthSalary);
     }
 
     public String informTotal() {
-        return String.format("[이름 : %s || 직급 : %s || 이메일 : %s || 전화번호 : %s ||" +
-                " 가족 수 : %d || 기본급 : %d || 가족수당 : %d || 세율 : %.2f || 세후 급여 : %d]",
-                name, rank, email, phone, family, basePay, familyBonus, taxRate, monthSalary);
+        return String.format("[사원 아이디: %s || 이름 : %s || 직급 : %s || 이메일 : %s || 전화번호 : %s ||" +
+                        " 가족 수 : %d || 기본급 : %d || 가족수당 : %d || 세율 : %.2f || 세후 급여 : %d]",
+                id, name, rank, email, phone, family, basePay, familyBonus, taxRate, monthSalary);
     }
+
+    public void initBasePay(String rank) {
+
+        switch (rank) {
+            case "사원" :
+                setBasePay(2000000);
+                break;
+            case "대리" :
+                setBasePay(2500000);
+                break;
+            case "과장" :
+                setBasePay(3000000);
+                break;
+            case "부장" :
+                setBasePay(3500000);
+                break;
+        }
+    }
+
+    public void initFamilyBonus(int family) {
+
+        setFamilyBonus(family * this.familyBonusRate);
+    }
+
+    public void initTaxRate() {
+
+        int sum = this.basePay + this.familyBonus;
+
+        if (sum >= 2000000 && sum < 2500000) {
+            setTaxRate(0.05);
+        } else if (sum >= 2500000 && sum < 3000000) {
+            setTaxRate(0.1);
+        } else if (sum >= 3000000 && sum < 3500000) {
+            setTaxRate(0.15);
+        } else if (sum >= 3500000) {
+            setTaxRate(0.2);
+        }
+    }
+
+    public void initMonthSalary() {
+
+        setMonthSalary((int) (basePay + familyBonus - ((basePay + familyBonus) * taxRate)));
+    }
+
+
+    private void initTotalAll() {
+
+        initBasePay(this.rank);
+        initFamilyBonus(this.family);
+        initTaxRate();      // 기본급, 가족보너스 산출 후 실행되어야함.
+        initMonthSalary();   // 기본급, 가족보너스, 세율 산출 후 실행되어야함.
+    }
+
+    private void initTotalFamilyBonus() {
+
+        initFamilyBonus(this.family);
+        initTaxRate();      // 기본급, 가족보너스 산출 후 실행되어야함.
+        initMonthSalary();   // 기본급, 가족보너스, 세율 산출 후 실행되어야함.
+    }
+
+    private void initTotalTaxRate() {
+
+        initTaxRate();      // 기본급, 가족보너스 산출 후 실행되어야함.
+        initMonthSalary();   // 기본급, 가족보너스, 세율 산출 후 실행되어야함.
+    }
+
 
 
 } // end class

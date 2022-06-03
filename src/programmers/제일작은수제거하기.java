@@ -4,19 +4,23 @@ import java.util.Arrays;
 
 public class 제일작은수제거하기 {
     public static int[] solution(int[] arr) {
-        int[] answer = new int[arr.length-1];
+        int[] answer = new int[arr.length];
 
         if (arr.length-1 == 0) {
             answer = new int[] {-1};
             return answer;
         } else {
             int min = arr[0]; // 임시 최소값
-            
-            for (int num : arr) {
-                if (num < min) {
-                    min = num;
+            int minIdx = 0;
+
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] < min) {
+                    min = arr[i];
+                    minIdx = i;
                 }
             }
+            // 제일 작은수는 찾았다. 걔 빼고 어케 배열 만들지
+
 
 
         }
