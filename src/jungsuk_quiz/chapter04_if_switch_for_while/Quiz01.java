@@ -1,4 +1,4 @@
-package jungsuk_quiz.Chapter04_if_switch_for_while;
+package jungsuk_quiz.chapter04_if_switch_for_while;
 
 public class Quiz01 {
     public static void main(String[] args) {
