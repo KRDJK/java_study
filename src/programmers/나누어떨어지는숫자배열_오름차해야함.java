@@ -38,7 +38,7 @@ public class 나누어떨어지는숫자배열_오름차해야함 {
         // 오름차정렬을 하지 않았다..
         for (int i = 0; i < answer.length; i++) {
             for (int j = 0; j < answer.length; j++) {
-                if (answer[i] > answer[j]) {
+                if (answer[i] < answer[j]) {
                     int temp = answer[i];
                     answer[i] = answer[j];
                     answer[j] = temp;
