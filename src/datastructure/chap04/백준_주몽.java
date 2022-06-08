@@ -18,9 +18,6 @@ public class 백준_주몽 {
         int N = sc.nextInt();
         int M = sc.nextInt();
 
-        System.out.println("N = " + N);
-        System.out.println("M = " + M);
-
         int[] arr = new int[N];
 
         for (int i = 0; i < N; i++) {
@@ -28,11 +25,11 @@ public class 백준_주몽 {
         }
         sc.close();
 
-        System.out.println(Arrays.toString(arr)); // 배열 확인용
+//        System.out.println(Arrays.toString(arr)); // 배열 확인용
 
         // 먼저 정렬!
         Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr)); // 정렬 확인용
+//        System.out.println(Arrays.toString(arr)); // 정렬 확인용
 
         int s = 0;
         int start = arr[s];
@@ -42,15 +39,17 @@ public class 백준_주몽 {
 
         int count = 0;
 
-        while (s < e) {
+        while (start < end) {
+//            System.out.println("start = " + start);
+//            System.out.println("end = " + end);
             if (start + end < M) {
-                s++;
+                start = arr[s++];
             } else if (start + end > M) {
-                e--;
-            } else {
+                end = arr[e--];
+            } else if (start + end == M){
                 count++;
-                s++;
-                e--;
+                start = arr[s++];
+                end = arr[e--];
             }
         }
 

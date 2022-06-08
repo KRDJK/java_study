@@ -25,7 +25,7 @@ public class 투_포인터_01_제출용 {
 
 
         while (end < N) {
-//            System.out.printf("start: %d, end: %d, M : %d, count: %d\n", start, end, M, count);
+            System.out.printf("start: %d, end: %d, M : %d, count: %d\n", start, end, M, count);
             if (M == N) { // 원하는 합을 발견한 경우
                 count++;
                 end++;
