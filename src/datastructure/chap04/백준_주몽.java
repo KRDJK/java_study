@@ -39,7 +39,7 @@ public class 백준_주몽 {
 
         int count = 0;
 
-        while (start < end) {
+        while (s < e) {
 //            System.out.println("start = " + start);
 //            System.out.println("end = " + end);
             if (start + end < M) {
@@ -53,9 +53,7 @@ public class 백준_주몽 {
             }
         }
 
-
         System.out.println(count);
-
 
     } // end main
 } // end class
