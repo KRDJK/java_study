@@ -1,4 +1,4 @@
-package datastructure.chap05.stack;
+package datastructure.chap05.stack.solo;
 
 import java.util.Scanner;
 

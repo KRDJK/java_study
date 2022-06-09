@@ -1,41 +1,40 @@
-package datastructure.chap04;
+package datastructure.chap04.day0609;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class 백준_주몽_막트 {
-
+public class 백준_두수의합 {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        int N = sc.nextInt();
-        int M = sc.nextInt();
+        int n = sc.nextInt();
 
+        int[] arr = new int[n];
 
-        int[] arr = new int[N];
-
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
+        int x = sc.nextInt();
+        sc.close();
 
-        Arrays.sort(arr); // 오름차 정렬
+        Arrays.sort(arr);
+
 
         int start = 0;
-        int end = arr.length-1;
+        int end = n-1;
 
         int count = 0;
 
         while (start < end) {
-
             int sum = arr[start] + arr[end];
 
-            if (sum == M) {
+            if (sum == x) {
                 count++;
-                end--;
                 start++;
-            } else if (sum < M) {
+                end--;
+            } else if (sum < x) {
                 start++;
             } else {
                 end--;
@@ -44,7 +43,6 @@ public class 백준_주몽_막트 {
         } // end while
 
         System.out.println(count);
-
 
     } // end main
 } // end class
