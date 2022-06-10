@@ -17,7 +17,7 @@ public class Player extends Object {
         this.name = name;
         this.level = 1;
         this.hp = 50;
-        System.out.println("Player 생성자 호출!");
+//        System.out.println("Player 생성자 호출!");
     }
 
 

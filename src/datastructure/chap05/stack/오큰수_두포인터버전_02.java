@@ -1,21 +1,29 @@
 package datastructure.chap05.stack;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
-public class 오큰수_두포인터버전 {
-    public static void main(String[] args) {
+public class 오큰수_두포인터버전_02 {
+    public static void main(String[] args) throws IOException {
 
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = sc.nextInt();
+        int N = Integer.parseInt(br.readLine());
+//        br.skip(1L);
 
         int[] A = new int[N];
 
-        for (int i = 0; i < A.length; i++) {
-            A[i] = sc.nextInt();
+//        StringTokenizer st = new StringTokenizer();
+        String[] ss = br.readLine().split(" ");
+//        System.out.println(Arrays.toString(ss));
+        for (int i = 0; i < A.length ; i++) {
+            A[i] = Integer.parseInt(ss[i]);
         }
+
+//        System.out.println(Arrays.toString(A));
 
 
         int start = 0;
@@ -82,7 +90,7 @@ public class 오큰수_두포인터버전 {
 
         while (!que.isEmpty()) {
             if (que.size() == 1) {
-                System.out.print(que.poll());
+                System.out.print((que.poll()));
             } else {
                 System.out.print(que.poll()+ " ");
             }
