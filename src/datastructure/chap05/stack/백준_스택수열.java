@@ -7,10 +7,10 @@ public class 백준_스택수열 {
 
     public static void main(String[] args) {
 
-        int N = 5; // 1 ~ N까지의 자연수
+        int N = 8; // 1 ~ N까지의 자연수
 
         // 만들어야 할 수열
-        int[] A = {4, 5, 1, 2, 3};
+        int[] A = {4, 3, 6, 8, 7, 5, 2, 1};
 
 
         // 자바 api
