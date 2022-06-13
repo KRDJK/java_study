@@ -27,11 +27,26 @@ public class 백준_스택수열_혼자도전 {
             int targetNum = arr[i];
             
             if (targetNum >= num) { // push해야하는 경우
-                
+                while (targetNum >= num) { // num++하면서 targetNum과 같아질 때까지 반복
+                    stack.push(num++);
+                    s += "+\n";
+                }
+
+                stack.pop();
+                s += "-\n";
+
+            } else { // poll 해야하는 경우
+                int m = stack.pop();
+
+                if (m > targetNum) { // 가장 맨 위에 있던 수가
+                    s = "NO";
+                } else {
+                    s += "-\n";
+                }
             }
-            
         }
 
+        System.out.println(s);
 
     } // end main
 } // end class
