@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class 프로그래머스_k번째수 {
     public static int[] solution(int[] array, int[][] commands) {
+        // answer 배열 생성 없이 Que를 사용했어도 됐다.
         int[] answer = new int[commands.length];
 
         for (int i = 0; i < commands.length; i++) {
