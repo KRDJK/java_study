@@ -18,6 +18,7 @@ public abstract class 모험가 {
     // 기본공격 기능
     public boolean basicAttack() {
         // 공격에 성공하면 true, 실패하면 false 반환
+        return false;
     }
     
 
