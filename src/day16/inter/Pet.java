@@ -13,4 +13,10 @@ public interface Pet {
 
     // 안써도 자동으로 public abstract가 붙는다.
     public abstract void play(); // 애완동물이 노는 기능
+
+
+    static void m1() { // 선언 가능
+        System.out.println("hello");
+    }
+
 } // end interface
