@@ -8,10 +8,10 @@ public class ListExample {
     public static void main(String[] args) {
 
         // 삽입 삭제가 많이 일어날거 같으면 배열리스트보다 연결리스트를 쓰는게 낫다
-        // 문자열 여러개를 일렬로 저장해서 순차적으로 관리하고 싶을 때!!
-        
+
         // 배열 리스트 생성 - 초기 생성시 10개 공간이 주어지고
         // 데이터 추가시 동적으로 늘어남
+        // 문자열 여러개를 일렬로 저장해서 순차적으로 관리하고 싶을 때!!
         List<String> sList =new ArrayList<>();
 
 
