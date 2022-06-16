@@ -1,3 +1,4 @@
+/*
 package datastructure.chap02.linkedlist.singly;
 
 import java.util.LinkedList;
@@ -49,3 +50,4 @@ public class Main {
 
     } // end main
 } // end class
+*/

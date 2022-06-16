@@ -1,32 +1,32 @@
 package datastructure.chap02.linkedlist.singly;
 
 // 단방향 단순 연결 리스트
-public class SimpleLinkedList {
+public class SimpleLinkedList<E> {
 
     // 연결 리스트는 언제나 헤더노드 같은 감시노드를 갖고 있어야 함.
-    private HeaderNode header;
+    private HeaderNode<E> header;
     
     
     // 생성자
     public SimpleLinkedList() {
         //연결 리스트가 처음 생성됐을 때! 헤더노드도 같이 생성되어야 함.
-        this.header = new HeaderNode();
+        this.header = new HeaderNode<E>();
 
     }
 
 
     // 리스트의 첫 번째 위치로 노드를 삽입하는 메서드
-    public void addFirst(int data) {
+    public void addFirst(E data) {
 
-        System.out.printf("\n신규 데이터 %d 맨 앞에 추가!\n", data);
+//        System.out.printf("\n신규 데이터 %d 맨 앞에 추가!\n", data);
 
         // 새롭게 추가할 정수 데이터가 있으면 신규 노드 생성 및 데이터에 저장.
-        Node newNode = new Node(data); // 객체가 생성되면 객체 자체가 들어가는게 아니라 주소가 들어감.
+        Node<E> newNode = new Node<E>(data); // 객체가 생성되면 객체 자체가 들어가는게 아니라 주소가 들어감.
 //        System.out.printf("새로운 노드의 주소: %s\n", newNode);
 
 
         // 새로운 노드에게 기존의 첫번째 노드의 주소를 저장.
-        Node oldFirstNode = header.getFirstNode(); // 기존의 첫번째 노드 주소 획득
+        Node<E> oldFirstNode = header.getFirstNode(); // 기존의 첫번째 노드 주소 획득
 //        System.out.printf("기존 헤더가 감시하던 노드의 주소: %s\n", oldFirstNode);
 
 
@@ -44,14 +44,14 @@ public class SimpleLinkedList {
 
 
         // 리스트의 첫번째 노드 삭제
-        public Node removeFirst() {
+        public Node<E> removeFirst() {
             // 빈 리스트인지를 확인
             if (!header.isEmpty()) {
                 // 삭제 대상 노드를 키핑
-                Node tempNode = header.getFirstNode();
+                Node<E> tempNode = header.getFirstNode();
 
                 // 삭제 대상 노드의 다음 노드 주소 가져오기.
-                Node nextNode = tempNode.getNextNode(); // 야! 지워질 놈아 너 다음 주소 어딨어!
+                Node<E> nextNode = tempNode.getNextNode(); // 야! 지워질 놈아 너 다음 주소 어딨어!
 
                 // 헤더 노드가 다음 노드를 감시하도록 설정
                 header.setFirstNode(nextNode);
@@ -65,16 +65,16 @@ public class SimpleLinkedList {
         }
 
 
-        // 정렬된 리스트에서 특정 위치에 노드 삽입
+        /*// 정렬된 리스트에서 특정 위치에 노드 삽입
         public void insert(int data) {
 
             // 새로운 노드 생성
-            Node newNode = new Node(data);
+            Node<E> newNode = new Node<E>(data);
 
             // 첫 번째 노드를 가져와서 현재 노드로 설정
-            Node currunt = header.getFirstNode();
+            Node<E> currunt = header.getFirstNode();
             // 바로 이전 노드를 가져오기
-            Node prev = null;
+            Node<E> prev = null;
 
 
             // 삽입 위치 탐색
@@ -100,16 +100,16 @@ public class SimpleLinkedList {
             // 새로운 노드가 다음 노드를 가리키도록 설정.
             newNode.setNextNode(currunt);
 
-        } // end insert()
+        } // end insert()*/
 
 
 
-        // 정렬된 리스트에서 특정 위치 노드 삭제
-        public Node remove(int data) {
+        /*// 정렬된 리스트에서 특정 위치 노드 삭제
+        public Node<E> remove(int data) {
             // 첫 번째 노드를 가져와서 현재 노드로 설정
-            Node currunt = header.getFirstNode();
+            Node<E> currunt = header.getFirstNode();
             // 바로 이전 노드를 가져오기
-            Node prev = null;
+            Node<E> prev = null;
 
 
             // 삽입 위치 탐색
@@ -124,7 +124,7 @@ public class SimpleLinkedList {
             // 삭제 대상이 첫번째 노드인 경우
             if (prev == null && currunt != null) {
                 // 헤더가 기존의 두번째 노드를 감시하도록 설정.
-                Node secondNode = header.getFirstNode().getNextNode(); // currunt가 삭제대상이니까 currunt.nextNode()도 같은 결과다.
+                Node<E> secondNode = header.getFirstNode().getNextNode(); // currunt가 삭제대상이니까 currunt.nextNode()도 같은 결과다.
                 header.setFirstNode(secondNode);
             }
             // 삭제 대상이 중간 어딘가인 경우
@@ -134,7 +134,7 @@ public class SimpleLinkedList {
             }
             return currunt; // 삭제 대상 노드 반환
 
-        } // end remove
+        } // end remove*/
 
 
 
@@ -142,7 +142,7 @@ public class SimpleLinkedList {
         // 리스트를 전체 순회하여 완성된 문자열로 반환
         public  String printList() {
             String str = "[ ";
-            Node currunt = header.getFirstNode();
+            Node<E> currunt = header.getFirstNode();
 
             while (currunt != null) {
                 str += currunt.getData();
