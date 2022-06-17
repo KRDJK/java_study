@@ -1,12 +1,14 @@
 package day18.collection.practice.controller;
 
 import day18.collection.practice.model.vo.Artist;
+import day19.api.io.obj.Human;
 
+import java.io.*;
 import java.util.*;
 
 public class MusicManagementController {
 
-    private final Map<String, Artist> artistMap;
+    private Map<String, Artist> artistMap;
 
     public MusicManagementController() {
         artistMap = new HashMap<>();
@@ -18,6 +20,53 @@ public class MusicManagementController {
 
     
     // 메서드
+    // 세이브 파일 저장할 디렉토리 생성하는 메서드
+    public void makeDirectory() {
+        File dir = new File("E:/music");
+
+        if (!dir.exists()) dir.mkdirs();
+    }
+
+
+    // 세이브 해주는 메서드
+    public void save() {
+        try (ObjectOutputStream oos =
+                     new ObjectOutputStream(new FileOutputStream("E:/music/m.sav"))) {
+
+            oos.writeObject(artistMap);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // 세이브된걸 불러오는 기능(로드) 메서드
+    public void load() {
+
+        File file = new File("E:/music/m.sav");
+
+
+        if (file.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("E:/music/m.sav"))) {
+
+                artistMap = (Map<String, Artist>) ois.readObject();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
     // 등록된 가수가 몇 명인지 알려주는 메서드
     public int existArtistNum() {
         return artistMap.size();

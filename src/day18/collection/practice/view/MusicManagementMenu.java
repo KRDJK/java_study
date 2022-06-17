@@ -18,6 +18,10 @@ public class MusicManagementMenu {
 
     // 메서드
     public void mainMenu() {
+
+        mmc.makeDirectory();
+        mmc.load();
+
         while (true) {
             System.out.println("**** 음악 관리 프로그램 ****");
             System.out.printf("# 현재 등록된 가수: %d명\n", mmc.existArtistNum());
@@ -71,6 +75,9 @@ public class MusicManagementMenu {
                 System.out.printf("# 아티스트 %s님이 신규 등록되었습니다.\n", name);
                 break;
         }
+
+        mmc.save();
+
     } // end insertSong
 
 
