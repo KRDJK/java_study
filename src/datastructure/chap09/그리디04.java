@@ -23,6 +23,65 @@ package datastructure.chap09;
  */
 
 
-// 백준 1913
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+// 백준 1931
 public class 그리디04 {
-}
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        List<List<Integer>> A = new ArrayList<>(); // 2차원 리스트 생성
+
+        /*A.add(new ArrayList<Integer>(Arrays.asList(0, 6)));
+        A.add(new ArrayList<Integer>(Arrays.asList(3, 5)));
+        A.add(new ArrayList<Integer>(Arrays.asList(1, 4)));
+//        A.add(new ArrayList<Integer>(Arrays.asList(0, 4)));
+        A.add(new ArrayList<Integer>(Arrays.asList(5, 9)));
+        A.add(new ArrayList<Integer>(Arrays.asList(5, 7)));
+        A.add(new ArrayList<Integer>(Arrays.asList(3, 8)));
+        A.add(new ArrayList<Integer>(Arrays.asList(8, 11)));
+        A.add(new ArrayList<Integer>(Arrays.asList(6, 10)));
+        A.add(new ArrayList<Integer>(Arrays.asList(2, 13)));
+        A.add(new ArrayList<Integer>(Arrays.asList(8, 12)));
+        A.add(new ArrayList<Integer>(Arrays.asList(12, 14)));*/
+
+        int N = sc.nextInt();
+
+        for (int i = 0; i < N; i++) {
+            int a = sc.nextInt(), b = sc.nextInt();
+            A.add(new ArrayList<Integer>(Arrays.asList(a, b)));
+        }
+
+        // 종료시간 기준 정렬
+        A.sort((nList1, nList2) -> {
+            if (nList1.get(1) == nList2.get(1)) {
+                return nList1.get(0) - nList2.get(0);
+            }
+            return nList1.get(1) - nList2.get(1);
+        });
+
+//        for (List<Integer> nums : A) {
+//            System.out.println(nums);
+//        }
+
+        int endTime = A.get(0).get(1); // 4
+
+        int count = 1;
+
+        for (int i = 1; i < A.size(); i++) {
+            if (A.get(i).get(0) >= endTime) {
+                endTime = A.get(i).get(1);
+                count++;
+//                System.out.println("endTime = " + endTime);
+            }
+        }
+
+        System.out.println(count);
+
+
+    } // end main
+} // end class
