@@ -1,8 +1,10 @@
 package datastructure.chap10.binarytree;
 
+import java.util.Stack;
+
 class Node {
     private int data; // 트리에 저장할 데이터
-    private Node leftChild; // 왼쪽 자식
+    private Node leftChild;  // 왼쪽 자식
     private Node rightChild; // 오른쪽 자식
 
     public Node(int data) {
@@ -37,30 +39,29 @@ class Node {
     public String toString() {
         return String.format("[ %d ]", data);
     }
-} // end Node class
-
+}
 
 public class BinaryTree {
+
     private Node root; // 트리의 루트 노드
 
 
-    // ================ 삽입 ==================== //
+    //============= 삽입 ==============//
     public void add(int data) {
         // 삽입할 데이터 노드 생성
         Node newNode = new Node(data);
-        
-        
+
         // 빈 트리면 새로운 노드를 루트로 지정
         if (root == null) {
             root = newNode;
         } else {
             Node current = root;
             Node parent;
-            
+
             while (true) {
                 parent = current;
-                
-                // 삽입할 데이터가 타겟 노드의 데이터보다 작은 경우
+
+                // 삽입할 데이터가 타겟노드의 데이터보다 작은 경우
                 if (data < current.getData()) {
                     current = current.getLeftChild();
                     if (current == null) {
@@ -76,11 +77,10 @@ public class BinaryTree {
                 }
             }
         }
-    } // end add
+    }
 
 
-
-    // ================ 순회 ===================== //
+    //============= 순회 =============//
 
     // 전위 순회 (pre order) - 중전후
     public void preOrder(Node tempRoot) {
@@ -100,7 +100,7 @@ public class BinaryTree {
         }
     }
 
-    // 후위 순회 (in order) - 전후중
+    // 후위 순회 (post order) - 전후중
     public void postOrder(Node tempRoot) {
         if (tempRoot != null) {
             postOrder(tempRoot.getLeftChild());
@@ -110,155 +110,150 @@ public class BinaryTree {
     }
 
 
-    // ================ 탐색 ===================== //
+    //===================== 탐색 ===================//
+
     public Node find(int targetData) {
-        Node currunt = root;
-        
+
+        Node current = root;
+
         while (true) {
-            if (currunt == null) return null; // 탐색 실패
+            if (current == null) return null; // 탐색 실패
 
             // 찾는 값이 현재 노드의 값보다 작은 경우
-            if (targetData < currunt.getData()) {
-                currunt = currunt.getLeftChild();
-            } else if (targetData > currunt.getData()) {
-                currunt = currunt.getRightChild();
+            if (targetData < current.getData()) {
+                current = current.getLeftChild();
+            } else if (targetData > current.getData()) {
+                current = current.getRightChild();
             } else {
-                return currunt; // 탐색 성공
+                return current; // 탐색 성공
             }
         }
-    } // end find
 
+    }
 
-    // ================ 최대, 최소값 탐색 ===================== //
+    //============ 최대, 최소값 탐색 =================//
     public Node findMin() {
-        Node currunt = root;
+        if (isEmpty()) return null; // 탐색 실패
 
-        if (isEmpty()) {
-            return null;
-        } else {
-            Node parent = currunt;
-            while (currunt != null) {
-                parent = currunt;
-                currunt = currunt.getLeftChild();
-            }
-            return parent;
+        Node current = root;
+        while (current.getLeftChild() != null) {
+            current = current.getLeftChild();
         }
+        return current;
     }
-
     public Node findMax() {
-        Node currunt = root;
+        if (isEmpty()) return null; // 탐색 실패
 
-        if (isEmpty()) {
-            return null;
-        } else {
-            Node parent = currunt;
-            while (currunt != null) {
-                parent = currunt;
-                currunt = currunt.getRightChild();
-            }
-            return parent;
+        Node current = root;
+        while (current.getRightChild() != null) {
+            current = current.getRightChild();
         }
+        return current;
     }
 
-
-    // ================ 삭제 ===================== //
+    //================== 삭제 =================//
     public boolean delete(int targetData) {
         // 삭제 노드와 해당 삭제노드의 부모노드를 탐색
-        Node currunt = root;
-        Node parent = currunt;
+        Node current = root;
+        Node parent = current;
 
-        while (targetData != currunt.getData()) {
-            if (currunt == null) return false;
-            
-            parent = currunt;
-            if (targetData < currunt.getData()) {
-                currunt = currunt.getLeftChild();
+        while (targetData != current.getData()) {
+            if (current == null) return false;
+
+            parent = current;
+            if (targetData < current.getData()) {
+                current = current.getLeftChild();
             } else {
-                currunt = currunt.getRightChild();
+                current = current.getRightChild();
             }
         }
-        
-        // 삭제 진행
-        // 1. 삭제 대상 노드의 자식이 없는 경우 (삭제 대상이 잎 노드인 경우)
-        if (currunt.getLeftChild() == null && currunt.getRightChild() == null) {
 
-            if (currunt == root) { // 삭제 대상이 루트인 경우
+        // 삭제 진행
+        // 삭제 대상노드의 자식이 없는 경우
+        if (current.getLeftChild() == null
+                && current.getRightChild() == null) {
+
+            if (current == root) { // 루트가 삭제대상
                 root = null;
-            } else if (parent.getRightChild() == currunt) { // 삭제 대상이 부모의 오른쪽 자식이었다면
+            } else if (parent.getRightChild() == current) { // 삭제 대상이 부모의 오른쪽 자식이었다면
                 parent.setRightChild(null);
             } else {
                 parent.setLeftChild(null);
             }
         }
-
-        // 2-1. 삭제 대상 노드의 자식이 하나인 경우 - 왼쪽 자식인 경우
-        else if (currunt.getRightChild() == null) {
+        // 삭제 대상 노드의 자식이 하나인 경우 - 왼쪽 자식인 경우
+        else if (current.getRightChild() == null) {
 
             // 삭제 대상이 루트
-            if (currunt == root) {
-                root = currunt.getLeftChild();
-
-            } else if (currunt == parent.getLeftChild()) { // 삭제 대상이 부모의 왼쪽 자식인 경우
-                // 부모의 새로운 왼쪽 자식으로 삭제 대상의 자식을 연결
-                parent.setLeftChild(currunt.getLeftChild());
-
-            } else { // 삭제 대상이 부모의 오른쪽 자식인 경우
-                // 부모의 새로운 오른쪽 자식으로 삭제 대상의 자식을 연결
-                parent.setRightChild(currunt.getLeftChild());
+            if (current == root) {
+                root = current.getLeftChild();
+                // 삭제 대상이 부모의 왼쪽 자식인 경우
+            } else if (current == parent.getLeftChild()) {
+                // 부모의 새로운 왼쪽자식으로 삭제대상의 자식을 연결
+                parent.setLeftChild(current.getLeftChild());
+                // 삭제 대상이 부모의 오른쪽 자식인 경우
+            } else {
+                // 부모의 새로운 오른쪽자식으로 삭제대상의 자식을 연결
+                parent.setRightChild(current.getLeftChild());
             }
-        }
 
-        // 2-2. 삭제 대상 노드의 자식이 하나인 경우 - 오른쪽 자식인 경우
-        else if (currunt.getLeftChild() == null) {
+        }
+        // 삭제 대상 노드의 자식이 하나인 경우 - 오른쪽 자식인 경우
+        else if (current.getLeftChild() == null) {
             // 삭제 대상이 루트
-            if (currunt == root) {
-                root = currunt.getRightChild();
-
-            } else if (currunt == parent.getLeftChild()) { // 삭제 대상이 부모의 왼쪽 자식인 경우
-                // 부모의 새로운 왼쪽 자식으로 삭제 대상의 자식을 연결
-                parent.setLeftChild(currunt.getRightChild());
-
-            } else { // 삭제 대상이 부모의 오른쪽 자식인 경우
-                // 부모의 새로운 오른쪽 자식으로 삭제 대상의 자식을 연결
-                parent.setRightChild(currunt.getRightChild());
+            if (current == root) {
+                root = current.getRightChild();
+                // 삭제 대상이 부모의 왼쪽 자식인 경우
+            } else if (current == parent.getLeftChild()) {
+                // 부모의 새로운 왼쪽자식으로 삭제대상의 자식을 연결
+                parent.setLeftChild(current.getRightChild());
+                // 삭제 대상이 부모의 오른쪽 자식인 경우
+            } else {
+                // 부모의 새로운 오른쪽자식으로 삭제대상의 자식을 연결
+                parent.setRightChild(current.getRightChild());
             }
         }
-
-        // 3. 삭제 대상 노드의 자식이 둘인 경우
+        // 삭제 대상 노드의 자식이 둘인 경우
         else {
             // 삭제 노드를 대체할 후보 노드 찾기
-            Node candidate = getCandidate(currunt);
+            Node candidate = getCandidate(current);
 
-            if (currunt == root) { // 삭제 대상이 루트인 경우
+            if (current == root) {
                 root = candidate;
-            } else if (currunt == parent.getLeftChild()) {
+            } else if (current == parent.getLeftChild()) {
                 parent.setLeftChild(candidate);
             } else {
                 parent.setRightChild(candidate);
             }
 
-            candidate.setLeftChild(currunt.getLeftChild());
+            candidate.setLeftChild(current.getLeftChild());
         }
 
         return true;
-    } // end delete
-
-
+    }
 
     // 후보 노드 찾기
     private Node getCandidate(Node deleteNode) {
 
-        Node candidate = deleteNode.getRightChild();
+        Node candidateParent = deleteNode;
+        Node candidate = candidateParent.getRightChild();
 
-        // 후보 노드는 삭제 노드의 오른쪽 자식 중에 가장 왼쪽 끝에 있는 자식
+        // 삭제노드 오른쪽 자식의 왼쪽 자식 찾기
         while (candidate.getLeftChild() != null) {
+            candidateParent = candidate;
             candidate = candidate.getLeftChild();
+        }
+
+        // 후보노드가 삭제노드 왼쪽자식일 때
+        if (candidate != deleteNode.getRightChild()) {
+            // 단계 1.
+            candidateParent.setLeftChild(candidate.getRightChild());
+            // 단계 2.
+            candidate.setRightChild(deleteNode.getRightChild());
         }
 
         return candidate;
     }
-
-
 
 
     // 빈 트리인지 확인
@@ -269,5 +264,51 @@ public class BinaryTree {
 
     public Node getRoot() {
         return root;
+    }
+
+    //================= 트리 출력 ======================//
+    public void display() {
+        Stack<Node> globalStack = new Stack<>();
+        globalStack.push(root);
+
+        int blank = 32;
+        boolean isRowEmpty = false;
+
+        while (!isRowEmpty) {
+            Stack<Node> localStack = new Stack<>();
+            isRowEmpty = true;
+
+            for (int i = 0; i < blank; i++) {
+                System.out.print(" ");
+            }
+
+            while (!globalStack.isEmpty()) {
+                Node temp = globalStack.pop();
+
+                if (temp != null) {
+                    System.out.print(temp.getData());
+                    localStack.push(temp.getLeftChild());
+                    localStack.push(temp.getRightChild());
+
+                    if (temp.getLeftChild() != null || temp.getRightChild() != null) {
+                        isRowEmpty = false;
+                    }
+                } else {
+                    System.out.print("**");
+                    localStack.push(null);
+                    localStack.push(null);
+                }
+                for (int i = 0; i < blank * 2 - 2; i++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+            blank /= 2;
+
+            while (!localStack.isEmpty()) {
+                globalStack.push(localStack.pop());
+            }
+        }
+        System.out.println();
     }
 }
