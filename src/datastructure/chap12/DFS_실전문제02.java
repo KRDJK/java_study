@@ -1,6 +1,8 @@
 package datastructure.chap12;
 
 
+import java.util.Scanner;
+
 // 백준 2023번
 public class DFS_실전문제02 {
     /*
@@ -33,4 +35,74 @@ public class DFS_실전문제02 {
               9    9    9
 
  */
-}
+
+    static int N;
+
+    public static void main(String[] args) {
+
+//        System.out.println(isPrime(7)); // true
+//        System.out.println(isPrime(21)); // false
+//        System.out.println(isPrime(23)); // true
+
+        /*for (int i = 1001; i <= 2000; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+                // 2자리수가 되는 순간부터 자리수가 얼마나 늘어나도 소수가 되려면 1의 자리수는 항상 홀수다.
+            }
+        }*/
+
+        Scanner sc = new Scanner(System.in);
+
+        N = sc.nextInt();
+        sc.close();
+
+        DFS(2, 1);
+        DFS(3, 1);
+        DFS(5, 1);
+        DFS(7, 1);
+
+
+
+    }
+
+    
+    /**
+     * DFS 메서드
+     * @param number - 소수 판별할 숫자
+     * @param level - 재귀 길이 레벨
+     */
+    // DFS 메서드
+    static void DFS(int number, int level) {
+
+        if (level == N) {
+            if (isPrime(number)) {
+                System.out.println(number);
+            }
+            return;
+        }
+
+
+        // 자리수가 올라갈수록 홀수들만 뒤에 이어붙여서 DFS를 반복 수행한다. 재귀로
+        for (int i = 1; i < 10; i+=2) {
+            int newNumber = number * 10 + i; // 자리수 증가
+
+            if (isPrime(newNumber)) { // 소수만 DFS 추가 진행
+                DFS(newNumber, level+1);
+            }
+        }
+
+    }
+
+
+
+    // 어떤 숫자가 소수인지 판별하는 메서드
+    static boolean isPrime(int num) {
+        for (int i = 2; i < num; i++) { // 1로는 어차피 다 나눠지니까 2부터 시작하는게 맞다.
+            // 2부터 해당 수까지 한번도 나누어 떨어지지 않아야 소수다. 한번이라도 나누어 떨어지면 소수가 아니다.
+            // 자기 자신으로도 나누어지는건 확실하니까 볼 필요 없다. 자기자신 미만까지 나누어 떨어지는지 보면 된다.
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+
+} // end class
